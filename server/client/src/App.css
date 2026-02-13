@@ -1,0 +1,164 @@
+.app {
+  min-height: 100vh;
+  padding: 56px 6vw 72px;
+  display: grid;
+  gap: 36px;
+  color: var(--text-primary);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.hero h1 {
+  margin: 16px 0 8px;
+  font-family: "Fraunces", serif;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  letter-spacing: -0.03em;
+}
+
+.hero p {
+  margin: 0;
+  max-width: 520px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 16px rgba(255, 83, 112, 0.8);
+}
+
+.status.online .status-dot {
+  background: var(--accent-strong);
+  box-shadow: 0 0 16px rgba(0, 198, 174, 0.8);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 16px 40px rgba(12, 14, 22, 0.24);
+  display: grid;
+  gap: 14px;
+}
+
+.card.highlight {
+  background: radial-gradient(circle at top, rgba(0, 198, 174, 0.2), transparent 55%),
+    var(--panel);
+  border-color: rgba(0, 198, 174, 0.4);
+}
+
+.card-title {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.card-value {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 600;
+}
+
+.price-rows {
+  display: grid;
+  gap: 12px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.price-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.price-value {
+  font-size: clamp(1.3rem, 2.5vw, 2.3rem);
+  font-weight: 600;
+}
+
+.card-sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  background: var(--panel);
+  border-radius: 20px;
+  border: 1px solid var(--panel-border);
+  padding: 20px 24px;
+}
+
+.meta span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.meta strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-top: 6px;
+}
+
+@media (max-width: 720px) {
+  .app {
+    padding: 40px 6vw 56px;
+  }
+
+  .status {
+    width: 100%;
+    justify-content: center;
+  }
+}

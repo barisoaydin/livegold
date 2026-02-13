@@ -1,0 +1,9 @@
+{
+  "name": "livegold-root",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix server start",
+    "start:client": "npm --prefix server/client start",
+    "install:all": "npm --prefix server install && npm --prefix server/client install"
+  }
+}

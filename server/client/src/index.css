@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #0b0f14;
+  --panel: rgba(17, 22, 32, 0.92);
+  --panel-border: rgba(106, 120, 160, 0.25);
+  --text-primary: #f4f1ea;
+  --text-muted: rgba(244, 241, 234, 0.6);
+  --accent-strong: #00c6ae;
+  --accent-soft: rgba(0, 198, 174, 0.12);
+  --danger: #ff5370;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  background: radial-gradient(circle at top left, rgba(0, 198, 174, 0.2), transparent 45%),
+    radial-gradient(circle at 20% 90%, rgba(255, 210, 87, 0.15), transparent 50%),
+    var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}

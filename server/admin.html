@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiveGold Admin</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 32px;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .price-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔑 LiveGold Admin Panel</h1>
+    
+    <form id="priceForm">
+      <div class="form-group">
+        <label for="instrument">Yatırım Araçları</label>
+        <select id="instrument" required>
+          <option value="">Seçiniz...</option>
+          <option value="USD/TRY">USD/TRY</option>
+          <option value="EUR/TRY">EUR/TRY</option>
+          <option value="GRAM_ALTIN_24">Gram Altın (24 Ayar)</option>
+          <option value="CEYREK_ALTIN">Çeyrek Altın</option>
+          <option value="KULCE_ALTIN_100G">Külçe Altın (100g)</option>
+        </select>
+      </div>
+
+      <div class="price-row">
+        <div class="form-group">
+          <label for="buy">Alış Fiyatı</label>
+          <input type="number" id="buy" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="sell">Satış Fiyatı</label>
+          <input type="number" id="sell" step="0.01" required>
+        </div>
+      </div>
+
+      <button type="submit">Güncelle</button>
+    </form>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3001';
+
+    document.getElementById('priceForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const instrument = document.getElementById('instrument').value;
+      const buy = parseFloat(document.getElementById('buy').value);
+      const sell = parseFloat(document.getElementById('sell').value);
+
+      const messageDiv = document.getElementById('message');
+
+      try {
+        const response = await fetch(`${API_URL}/admin/prices`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ instrument, buy, sell }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          messageDiv.className = 'message success';
+          messageDiv.textContent = `✅ ${instrument} başarıyla güncellendi!`;
+          
+          document.getElementById('buy').value = '';
+          document.getElementById('sell').value = '';
+          document.getElementById('instrument').value = '';
+        } else {
+          throw new Error(data.error || 'Bilinmeyen hata');
+        }
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = `❌ Hata: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
