@@ -1,3 +1,3 @@
 # livegold
 
-A website that provides real-time currency and gold prices.
+A project that can make gold and currency prices readily available by pulling real-time data.
